@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>funny circle</title>
+</head>
+<body>
+<img id="top" src="len.png"style="left: 600px; top: 300px ">
+<canvas id="myCanvas" width="1366" height="608" style="border: 3px solid black"></canvas>
+<script>
+
+    function Oto(image, x, y,tocDo) {
+        this.x = x;
+        this.y = y;
+        this.tocDo = tocDo;
+        this.move = function () {
+            this.y -= this.tocDo;
+        };
+        this.upSpeed = function () {
+            this.tocDo +=1;
+        };
+        this.draw = function (ctx) {
+            ctx.drawImage(image, this.x, this.y);
+        }
+    }
+    let ctx = document.getElementById("myCanvas").getContext("2d");
+    let imagetop = document.getElementById("top");
+    let oto1 = new Oto(imagetop, 600, 300,1);
+
+    function draw() {
+        ctx.clearRect(0, 0, 1366, 608);
+        oto1.draw(ctx);
+        oto1.move(1);
+        requestAnimationFrame(draw);
+    }
+
+    window.addEventListener('keydown', keydownHandler);
+    function keydownHandler(evt) {
+        switch (evt.keyCode) {
+            case 17:
+                console.log("adads");
+                oto1.upSpeed();
+                break;
+
+        }
+    }
+
+
+    draw();
+
+    console.log(oto1.tocDo);
+</script>
+</body>
+</html>
